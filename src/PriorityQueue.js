@@ -70,9 +70,10 @@ class PriorityQueue {
         }
     }
 
-    _findElementIndex(elt) {
+    _findElementIndex(item) {
+        // TODO: optimize
         for (let i = 0, l = this.heap.length; i < l; i++) {
-            if (this.heap[i].elt === elt) { return i; }
+            if (this.heap[i].item === item) { return i; }
         }
         return -1;
     }
@@ -81,8 +82,8 @@ class PriorityQueue {
         return this.heap.length;
     }
 
-    insert(element, key) {
-        this.heap.push({elt: element, key: key});
+    insert(item, key) {
+        this.heap.push({item, key});
         this._bubbleUp(this.heap.length - 1);
     }
 
@@ -90,7 +91,7 @@ class PriorityQueue {
         if (this.heap.length === 0) {
             return null;
         }
-        const elt = this.heap[0];
+        const element = this.heap[0];
         const end = this.heap.pop();
         // replace the first element by the last,
         // and let it sink to its right place
@@ -98,7 +99,7 @@ class PriorityQueue {
             this.heap[0] = end;
             this._sinkDown(0);
         }
-        return elt;
+        return element;
     }
 
     peek() {
@@ -108,8 +109,8 @@ class PriorityQueue {
         return this.heap[0];
     }
 
-    updateKey(element, newKey) {
-        const idx = this._findElementIndex(element);
+    updateKey(item, newKey) {
+        const idx = this._findElementIndex(item);
         if (idx === -1) {
             return;
         }

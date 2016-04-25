@@ -88,9 +88,10 @@ var PriorityQueue = function () {
         }
     }, {
         key: "_findElementIndex",
-        value: function _findElementIndex(elt) {
+        value: function _findElementIndex(item) {
+            // TODO: optimize
             for (var i = 0, l = this.heap.length; i < l; i++) {
-                if (this.heap[i].elt === elt) {
+                if (this.heap[i].item === item) {
                     return i;
                 }
             }
@@ -98,8 +99,8 @@ var PriorityQueue = function () {
         }
     }, {
         key: "insert",
-        value: function insert(element, key) {
-            this.heap.push({ elt: element, key: key });
+        value: function insert(item, key) {
+            this.heap.push({ item: item, key: key });
             this._bubbleUp(this.heap.length - 1);
         }
     }, {
@@ -108,7 +109,7 @@ var PriorityQueue = function () {
             if (this.heap.length === 0) {
                 return null;
             }
-            var elt = this.heap[0];
+            var element = this.heap[0];
             var end = this.heap.pop();
             // replace the first element by the last,
             // and let it sink to its right place
@@ -116,7 +117,7 @@ var PriorityQueue = function () {
                 this.heap[0] = end;
                 this._sinkDown(0);
             }
-            return elt;
+            return element;
         }
     }, {
         key: "peek",
@@ -128,8 +129,8 @@ var PriorityQueue = function () {
         }
     }, {
         key: "updateKey",
-        value: function updateKey(element, newKey) {
-            var idx = this._findElementIndex(element);
+        value: function updateKey(item, newKey) {
+            var idx = this._findElementIndex(item);
             if (idx === -1) {
                 return;
             }

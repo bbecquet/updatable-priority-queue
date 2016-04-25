@@ -14,12 +14,12 @@ describe('PriorityQueue', function() {
         it('returns null on an empty PriorityQueue', function() {
             assert.isNull(pq.pop());
         });
-        it('returns and removes the element of mininum cost', function() {
+        it('returns and removes the item of mininum cost', function() {
             pq.insert('a', 5);
             pq.insert('b', 1);
             pq.insert('c', 3);
-            assert.deepEqual(pq.pop(), {elt: 'b', key: 1});
-            assert.deepEqual(pq.pop(), {elt: 'c', key: 3});
+            assert.deepEqual(pq.pop(), {item: 'b', key: 1});
+            assert.deepEqual(pq.pop(), {item: 'c', key: 3});
         });
     });
 
@@ -53,32 +53,32 @@ describe('PriorityQueue', function() {
             assert.isNull(pq.peek());
         });
 
-        it('returns the element of mininum cost without removing it from the queue', function() {
+        it('returns the item of mininum cost without removing it from the queue', function() {
             pq.insert('a', 5);
             pq.insert('b', 1);
             pq.insert('c', 3);
-            // so it can be called multiple times and return the same element
-            assert.deepEqual(pq.peek(), {elt: 'b', key: 1});
-            assert.deepEqual(pq.peek(), {elt: 'b', key: 1});
-            assert.deepEqual(pq.peek(), {elt: 'b', key: 1});
+            // so it can be called multiple times and return the same item
+            assert.deepEqual(pq.peek(), {item: 'b', key: 1});
+            assert.deepEqual(pq.peek(), {item: 'b', key: 1});
+            assert.deepEqual(pq.peek(), {item: 'b', key: 1});
         });
     });
 
     describe('updateKey()', function() {
-        it('changes the order of the elements when the key is greater', function() {
+        it('changes the order of the items when the key is greater', function() {
             pq.insert('a', 1);
             pq.insert('b', 2);
             pq.insert('c', 3);
             pq.updateKey('a', 5);
-            assert.deepEqual(pq.peek(), {elt: 'b', key: 2});
+            assert.deepEqual(pq.peek(), {item: 'b', key: 2});
         });
 
-        it('changes the order of the elements when the key is lesser', function() {
+        it('changes the order of the items when the key is lesser', function() {
             pq.insert('a', 1);
             pq.insert('b', 2);
             pq.insert('c', 3);
             pq.updateKey('c', 0);
-            assert.deepEqual(pq.peek(), {elt: 'c', key: 0});
+            assert.deepEqual(pq.peek(), {item: 'c', key: 0});
         });
     });
 });
